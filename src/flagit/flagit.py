@@ -142,14 +142,14 @@ class Interface(object):
         if not flag_numbers:
             flags_dict = {
                 'C01': self.flag_C01, 'C02': self.flag_C02, 'C03': self.flag_C03, 'D01': self.flag_D01,
-                'D02': self.flag_D02, 'D03': self.flag_D03, 'D04': self.flag_D04, 'D05': self.flag_D05,
+                'D04': self.flag_D04, 'D05': self.flag_D05,
                 'D06': self.flag_D06, 'D07': self.flag_D07, 'D09': self.flag_D09, 'D10': self.flag_D10,
                 'G': self.flag_G,
             }
         else:
             flags_dict = {
                 1: self.flag_C01, 2: self.flag_C02, 3: self.flag_C03, 4: self.flag_D01,
-                5: self.flag_D02, 6: self.flag_D03, 7: self.flag_D04, 8: self.flag_D05,
+                7: self.flag_D04, 8: self.flag_D05,
                 9: self.flag_D06, 10: self.flag_D07, 12: self.flag_D09, 13: self.flag_D10,
                 14: self.flag_G,
             }
@@ -284,6 +284,8 @@ class Interface(object):
             index = self.data[self.data.soil_temperature < t.ancillary_ts_lower].index
             if len(index):
                 self.data['qflag'][index].apply(lambda x: x.add(tag))
+        else:
+            self.flag_D03(self, "D03")
 
     def flag_D02(self, tag):
         """
